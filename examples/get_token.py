@@ -14,8 +14,10 @@ import json
 
 
 def main(args):
+    body={"userId": f"{args.username}", "password": f"{args.password}"}
+    h={"Content-type": "application/json"}
     r = requests.post('https://' + args.server + '/cvpservice/login/authenticate.do',
-                      auth=(args.username, args.password), verify=args.ssl is False)
+                       verify=args.ssl is False, data=json.dumps(body), headers=h)
 
     r.json()['sessionId']
 
